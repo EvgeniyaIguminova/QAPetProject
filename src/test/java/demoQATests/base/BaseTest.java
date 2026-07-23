@@ -7,15 +7,17 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class BaseTest {
-    public WebDriver driver;
+import java.time.Duration;
+
+public abstract class BaseTest {
+    protected WebDriver driver;
 
     @Step("Открыть браузер")
     @BeforeMethod
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        new Actions(driver).pause(500).perform();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
     @Step("Закрыть браузер")
